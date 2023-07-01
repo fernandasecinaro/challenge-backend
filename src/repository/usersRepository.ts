@@ -11,15 +11,13 @@ class UsersRepository implements IUsersRepository {
       where: {
         email,
       },
-      include: {
-        subscriptions: true,
-      },
     });
   }
+
   public async createUser(userData: User): Promise<User> {
     await client.$queryRaw`
     INSERT INTO User (email, password, id, createdAt, updatedAt, familyId, role, name)
-    VALUES (${userData.email}, ${userData.password}, ${userData.id}, ${userData.createdAt}, ${userData.updatedAt}, ${userData.familyId}, ${userData.role}, ${userData.name})
+    VALUES (${userData.email}, ${userData.password}, ${userData.id}, ${userData.createdAt}, ${userData.updatedAt}, ${userData.familyId}, ${userData.role}, ${userData.fullName})
     `;
     return (await this.getUserById(userData.id)) as User;
   }
@@ -28,9 +26,6 @@ class UsersRepository implements IUsersRepository {
     return await client.user.findUnique({
       where: {
         id,
-      },
-      include: {
-        subscriptions: true,
       },
     });
   }

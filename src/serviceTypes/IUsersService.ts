@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
-import { RegisterRequest } from 'models/requests/register/RegisterRequest';
+import { RegisterUserRequest } from 'models/requests/register/RegisterUserRequest';
 
 export interface IUsersService {
-  registerUser(requestData: RegisterRequest): Promise<User>;
+  registerUser(requestData: RegisterUserRequest): Promise<User>;
 }

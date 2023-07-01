@@ -5,12 +5,13 @@ import { IUsersService } from 'serviceTypes/IUsersService';
 import UsersRepository from 'repository/usersRepository';
 import { IUsersRepository } from 'repositoryTypes/IUsersRepository';
 import IAuthService from 'serviceTypes/IAuthService';
-import MsUsersService from 'services/MSUsersService';
+import UsersService from 'services/UsersService';
+import AuthService from 'services/AuthService';
 
 const myContainer = new Container();
 myContainer.bind<IUsersRepository>(REPOSITORY_SYMBOLS.IUsersRepository).to(UsersRepository);
 
-myContainer.bind<IUsersService>(SERVICE_SYMBOLS.IUsersService).to(MsUsersService);
-myContainer.bind<IAuthService>(SERVICE_SYMBOLS.IAuthService).to(MsAuthService);
+myContainer.bind<IUsersService>(SERVICE_SYMBOLS.IUsersService).to(UsersService);
+myContainer.bind<IAuthService>(SERVICE_SYMBOLS.IAuthService).to(AuthService);
 
 export default myContainer;

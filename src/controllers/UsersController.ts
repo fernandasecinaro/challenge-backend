@@ -3,7 +3,7 @@ import express from 'express';
 import { Request, Response } from 'express';
 import { injectable, inject } from 'inversify';
 import { validate } from 'middlewares/validate';
-import { RegisterAdminRequestSchema } from 'models/requests/register/RegisterAdminRequest';
+import { RegisterUserRequestSchema } from 'models/requests/register/RegisterUserRequest';
 import 'reflect-metadata';
 import { IUsersService } from 'serviceTypes/IUsersService';
 import { SERVICE_SYMBOLS } from '../serviceTypes/serviceSymbols';
@@ -18,13 +18,13 @@ class UsersController {
   }
 
   public initializeRoutes() {
-    this.usersRouter.post(this.path, validate(RegisterAdminRequestSchema), this.registerAdmin);
+    this.usersRouter.post(this.path, validate(RegisterUserRequestSchema), this.registerUser);
   }
 
-  public registerAdmin = async (req: Request, res: Response) => {
+  public registerUser = async (req: Request, res: Response) => {
     try {
       const { body } = req;
-      await this._usersService.registerAdmin({ body });
+      await this._usersService.registerUser({ body });
       res.status(201).json({
         message: 'Admin registered successfully',
       });
