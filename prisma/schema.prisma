@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Family {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  apiKey     String     @unique @default(cuid())
+  members    User[]
+  categories Category[]
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  name          String
+  password      String
+  email         String         @unique
+  role          Role           @default(user)
+  family        Family         @relation(fields: [familyId], references: [id])
+  familyId      Int
+  subscriptions Subscription[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  expenses      Expense[]
+  Income        Income[]
+}
+
+enum Role {
+  admin
+  user
+}
+
+model Subscription {
+  id                     Int      @id @default(autoincrement())
+  categoryId             Int
+  category               Category @relation(fields: [categoryId], references: [id])
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  user                   User     @relation(fields: [userId], references: [id])
+  userId                 Int
+  isSpendingSubscription Boolean  @default(false)
+}
+
+model Category {
+  id                   Int       @id @default(autoincrement())
+  name                 String
+  description          String
+  image                String
+  monthlySpendingLimit Int       @default(0)
+  family               Family    @relation(fields: [familyId], references: [id])
+  familyId             Int
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  deleted              DateTime?
+  expenses             Expense[]
+  incomes              Income[]
+  subscriptions        Subscription[]
+}
+
+model Expense {
+  id          Int       @id @default(autoincrement())
+  amount      Decimal
+  description String
+  date        DateTime
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deleted     DateTime?
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model Income {
+  id          Int       @id @default(autoincrement())
+  amount      Decimal
+  description String
+  date        DateTime
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deleted     DateTime?
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+}

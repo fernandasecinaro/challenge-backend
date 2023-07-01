@@ -1,0 +1,30 @@
+{
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "obl1backv4.ci35tf3evlkp.us-east-1.rds.amazonaws.com",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "Cloud-arq",
+      "database": "db",
+      "username": "user",
+      "password": "password"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3308,
+      "driver": "MySQL",
+      "name": "local-arq",
+      "database": "db",
+      "username": "user",
+      "password": "password"
+    }
+  ]
+}
