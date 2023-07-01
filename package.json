@@ -15,8 +15,7 @@
     "format": "eslint src/**/*.ts --fix",
     "prepare": "if [[ $NODE_ENVIRONMENT != \"production\" ]]; then husky install; fi",
     "studio": "prisma studio",
-    "prisma:generate": "prisma generate",
-    "seed": "ts-node ./prisma/seed.ts"
+    "prisma:generate": "prisma generate"
   },
   "keywords": [],
   "author": "",
