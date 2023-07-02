@@ -6,7 +6,7 @@ import { IUsersService } from 'serviceTypes/IUsersService';
 import { RegisterUserRequest } from 'models/requests/register/RegisterUserRequest';
 import { IUsersRepository } from 'repositoryTypes/IUsersRepository';
 import { InvalidDataError } from 'errors/InvalidDataError';
-import { RegisteredUser } from 'models/responses/RegisteredUser';
+import { RegisteredUser } from 'models/responses/users/RegisteredUser';
 
 @injectable()
 class UsersService implements IUsersService {

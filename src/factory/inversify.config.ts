@@ -7,11 +7,14 @@ import { IUsersRepository } from 'repositoryTypes/IUsersRepository';
 import IAuthService from 'serviceTypes/IAuthService';
 import UsersService from 'services/UsersService';
 import AuthService from 'services/AuthService';
+import ISymptomsService from 'serviceTypes/ISymptomsService';
+import SymptomsService from 'services/SymptomsService';
 
 const myContainer = new Container();
 myContainer.bind<IUsersRepository>(REPOSITORY_SYMBOLS.IUsersRepository).to(UsersRepository);
 
 myContainer.bind<IUsersService>(SERVICE_SYMBOLS.IUsersService).to(UsersService);
 myContainer.bind<IAuthService>(SERVICE_SYMBOLS.IAuthService).to(AuthService);
+myContainer.bind<ISymptomsService>(SERVICE_SYMBOLS.ISymptomsService).to(SymptomsService);
 
 export default myContainer;
