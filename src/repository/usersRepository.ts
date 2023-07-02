@@ -1,5 +1,5 @@
 import client from 'models/client';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 import { IUsersRepository } from 'repositoryTypes/IUsersRepository';
@@ -14,12 +14,10 @@ class UsersRepository implements IUsersRepository {
     });
   }
 
-  public async createUser(userData: User): Promise<User> {
-    await client.$queryRaw`
-    INSERT INTO User (email, password, id, createdAt, updatedAt, familyId, role, name)
-    VALUES (${userData.email}, ${userData.password}, ${userData.id}, ${userData.createdAt}, ${userData.updatedAt}, ${userData.familyId}, ${userData.role}, ${userData.fullName})
-    `;
-    return (await this.getUserById(userData.id)) as User;
+  public async createUser(userData: Prisma.UserCreateInput): Promise<User> {
+    return await client.user.create({
+      data: userData,
+    });
   }
 
   public async getUserById(id: number): Promise<User | null> {
