@@ -10,10 +10,6 @@ import { IUsersRepository } from 'repositoryTypes/IUsersRepository';
 import { InvalidDataError } from 'errors/InvalidDataError';
 import 'reflect-metadata';
 
-interface IDecodedToken {
-  user: User;
-}
-
 @injectable()
 export default class AuthService implements IAuthService {
   private secret = process.env.JWT_SECRET;
