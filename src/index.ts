@@ -11,6 +11,8 @@ import AuthController from 'controllers/AuthController';
 import 'models/redisClient';
 import ISymptomsService from 'serviceTypes/ISymptomsService';
 import SymptomsController from 'controllers/SymptomsController';
+import IDiagnosisService from 'serviceTypes/IDiagnosisService';
+import DiagnosisController from 'controllers/DiagnosisController';
 
 dotenv.config();
 
@@ -31,9 +33,13 @@ const authController = new AuthController(authService);
 const symptomsService = myContainer.get<ISymptomsService>(SERVICE_SYMBOLS.ISymptomsService);
 const symptomsController = new SymptomsController(symptomsService);
 
+const diagnosisService = myContainer.get<IDiagnosisService>(SERVICE_SYMBOLS.IDiagnosisService);
+const diagnosisController = new DiagnosisController(diagnosisService);
+
 app.use('/api/v1', usersController.usersRouter);
 app.use('/api/v1', authController.authRouter);
 app.use('/api/v1', symptomsController.symptomsRouter);
+app.use('/api/v1', diagnosisController.diagnosisRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}: http://localhost:${PORT}`);
