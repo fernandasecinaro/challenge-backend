@@ -12,7 +12,7 @@ export const RegisterUserRequestSchema = z.object({
     dateOfBirth: z.preprocess((arg) => {
       if (typeof arg == 'string' || arg instanceof Date) return new Date(arg);
     }, z.date()),
-    gender: z.enum(['male', 'female', 'other']),
+    gender: z.enum(['male', 'female']),
   }),
 });
 
