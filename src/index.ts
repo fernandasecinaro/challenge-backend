@@ -12,7 +12,7 @@ import 'models/redisClient';
 import ISymptomsService from 'serviceTypes/ISymptomsService';
 import SymptomsController from 'controllers/SymptomsController';
 import IDiagnosisService from 'serviceTypes/IDiagnosisService';
-import DiagnosisController from 'controllers/DiagnosisController';
+import DiagnosesController from 'controllers/DiagnosesController';
 
 dotenv.config();
 
@@ -34,7 +34,7 @@ const symptomsService = myContainer.get<ISymptomsService>(SERVICE_SYMBOLS.ISympt
 const symptomsController = new SymptomsController(symptomsService);
 
 const diagnosisService = myContainer.get<IDiagnosisService>(SERVICE_SYMBOLS.IDiagnosisService);
-const diagnosisController = new DiagnosisController(diagnosisService);
+const diagnosisController = new DiagnosesController(diagnosisService);
 
 app.use('/api/v1', usersController.usersRouter);
 app.use('/api/v1', authController.authRouter);
