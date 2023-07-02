@@ -14,3 +14,23 @@ export interface DiagnosisResponse {
     SpecialistID: number;
   }[];
 }
+
+export interface Diagnosis {
+  issueId: number;
+  name: string;
+  accuracy: number;
+}
+
+export interface DiagnosisHistory {
+  issueId: number;
+  name: string;
+  accuracy: number;
+  id: number;
+  confirmed: boolean;
+}
+
+export interface DiagnosisConfirmation {
+  name: string;
+  id: number;
+  confirmed: boolean;
+}

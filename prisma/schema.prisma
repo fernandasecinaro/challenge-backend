@@ -9,13 +9,25 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   fullName    String
   dateOfBirth DateTime
-  gender      Gender   @default(male)
+  gender      Gender      @default(male)
   password    String
-  email       String   @unique
-  createdAt   DateTime @default(now())
+  email       String      @unique
+  createdAt   DateTime    @default(now())
+  Diagnosis   Diagnosis[]
+}
+
+model Diagnosis {
+  id        Int      @id @default(autoincrement())
+  issueId   Int
+  name      String
+  confirmed Boolean  @default(false)
+  accuracy  Float
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 enum Gender {

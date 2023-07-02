@@ -11,9 +11,12 @@ import ISymptomsService from 'serviceTypes/ISymptomsService';
 import SymptomsService from 'services/SymptomsService';
 import IDiagnosisService from 'serviceTypes/IDiagnosisService';
 import DiagnosisService from 'services/DiagnosisService';
+import { IDiagnosesRepository } from 'repositoryTypes/IDiagnosesRepository';
+import DiagnosesRepository from 'repository/diagnosesRepository';
 
 const myContainer = new Container();
 myContainer.bind<IUsersRepository>(REPOSITORY_SYMBOLS.IUsersRepository).to(UsersRepository);
+myContainer.bind<IDiagnosesRepository>(REPOSITORY_SYMBOLS.IDiagnosesRepository).to(DiagnosesRepository);
 
 myContainer.bind<IUsersService>(SERVICE_SYMBOLS.IUsersService).to(UsersService);
 myContainer.bind<IAuthService>(SERVICE_SYMBOLS.IAuthService).to(AuthService);

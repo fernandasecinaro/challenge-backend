@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const GetDiagnosisRequestSchema = z.object({
-  query: z.object({
+  body: z.object({
     symptoms: z.string().refine(
       (val) => {
         try {
