@@ -43,7 +43,6 @@ class DiagnosesController {
     }
   };
 
-  // TODO: Add pagination
   public getDiagnosesHistory = async (req: Request, res: Response) => {
     try {
       const diagnosesHistory = await this._diagnosesService.getDiagnosesHistory(req);

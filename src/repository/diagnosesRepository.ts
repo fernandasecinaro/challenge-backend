@@ -18,17 +18,10 @@ class DiagnosesRepository implements IDiagnosesRepository {
       where: {
         userId,
       },
-      select: {
-        issueId: true,
-        name: true,
-        accuracy: true,
-        id: true,
-        confirmed: true,
-      },
     });
 
-    return diagnoses.map((diagnosis: DiagnosisHistory) => {
-      const { issueId, name, accuracy, id, confirmed } = diagnosis;
+    return diagnoses.map((diagnosis: Diagnosis) => {
+      const { issueId, name, accuracy, id, confirmed, createdAt } = diagnosis;
 
       return {
         issueId,
@@ -36,6 +29,7 @@ class DiagnosesRepository implements IDiagnosesRepository {
         accuracy,
         id,
         confirmed,
+        date: createdAt,
       };
     });
   }
