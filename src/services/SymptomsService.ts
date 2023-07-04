@@ -17,8 +17,8 @@ class SymptomsService implements ISymptomsService {
         `/symptoms?token=${process.env.API_MEDIC_TOKEN}&format=json&language=en-gb`,
       );
       return data;
-    } catch (_error: any) {
-      console.error(_error.message);
+    } catch (error: any) {
+      console.error(error.message);
       throw new Error('There was an error while fetching symptoms');
     }
   }

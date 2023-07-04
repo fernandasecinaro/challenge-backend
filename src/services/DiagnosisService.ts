@@ -50,8 +50,8 @@ class DiagnosisService implements IDiagnosisService {
             };
           })
         : [];
-    } catch (_error: any) {
-      console.error(_error.message);
+    } catch (error: any) {
+      console.error(error.message);
       throw new Error('There was an error while fetching symptoms');
     }
   }
