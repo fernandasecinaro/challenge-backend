@@ -27,6 +27,7 @@ export interface DiagnosisHistory {
   accuracy: number;
   id: number;
   confirmed: boolean;
+  date: Date;
 }
 
 export interface DiagnosisConfirmation {
