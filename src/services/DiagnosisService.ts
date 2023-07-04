@@ -12,12 +12,13 @@ import { AuthRequest } from 'middlewares/requiresAuth';
 import { REPOSITORY_SYMBOLS } from 'repositoryTypes/repositorySymbols';
 import { IDiagnosesRepository } from 'repositoryTypes/IDiagnosesRepository';
 import { InvalidDataError } from 'errors/InvalidDataError';
+import { generateToken } from 'utils/generateToken';
 
 @injectable()
 class DiagnosisService implements IDiagnosisService {
-  private authServiceUrl = process.env.API_MEDIC_URL;
+  private serviceUrl = process.env.API_MEDIC_HEALTH_URL;
   private axiosInstance = axios.create({
-    baseURL: this.authServiceUrl,
+    baseURL: this.serviceUrl,
   });
 
   public constructor(
@@ -31,12 +32,24 @@ class DiagnosisService implements IDiagnosisService {
     } = req;
 
     try {
+      const token = generateToken();
+
+      const response = await axios.post(`${process.env.API_MEDIC_AUTH_URL}/login`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const { Token } = response.data;
+
       const { data: diagnoses }: { data: DiagnosisResponse[] } = await this.axiosInstance.get(
-        `/diagnosis?symptoms=${symptoms}&gender=${gender}&year_of_birth=${new Date(dateOfBirth).getFullYear()}&token=${
-          process.env.API_MEDIC_TOKEN
-        }&format=json&language=en-gb`,
+        `/diagnosis?symptoms=${symptoms}&gender=${gender}&year_of_birth=${new Date(
+          dateOfBirth,
+        ).getFullYear()}&token=${Token}&format=json&language=en-gb`,
       );
+
       await this.saveDiagnoses(diagnoses, userId);
+
       return diagnoses.length > 0
         ? diagnoses.map((diagnosis: DiagnosisResponse) => {
             const {
