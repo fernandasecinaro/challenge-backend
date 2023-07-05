@@ -62,3 +62,10 @@ Para correr las migraciones en produccion:
 5. Correr el comando `npx prisma migrate deploy`
 
 > :exclamation: Es posible evitar conectarse al contenedor de EC2 y correr las migraciones desde la maquina local si cambiamos la variable de nuestro `.env` con la base de datos que utiliza AWS. Esto no es recomendable pues al correr las migraciones desde el contenedor en AWS nos aseguramos que dichas migraciones son exactamente las que precisa la version del codigo que esta actualmente desplegado en la nube.
+
+
+#### Possible improvements
+
+- Add a middleware to catch error in controllers
+- Use Redis as a cache to improve performance
+
