@@ -8,7 +8,6 @@ import UsersController from 'controllers/UsersController';
 import { IUsersService } from 'serviceTypes/IUsersService';
 import IAuthService from 'serviceTypes/IAuthService';
 import AuthController from 'controllers/AuthController';
-import 'models/redisClient';
 import ISymptomsService from 'serviceTypes/ISymptomsService';
 import SymptomsController from 'controllers/SymptomsController';
 import IDiagnosisService from 'serviceTypes/IDiagnosisService';
